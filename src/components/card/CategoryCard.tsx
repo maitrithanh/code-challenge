@@ -13,7 +13,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ link, content, img }) => {
         <a href={link}>
           <div className="p-4">
             <img
-              className="rounded-md"
+              className="rounded-md hover:scale-105 transition-all duration-300"
               src={img}
               alt="cate1"
               height={121}

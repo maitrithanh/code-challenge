@@ -60,9 +60,9 @@ const Nav: React.FC<NavProps> = ({ handleOpenLogin }) => {
             </div>
           </div>
         </div>
-        <div className="">
+        {/* <div className="">
           <SuggestionTag />
-        </div>
+        </div> */}
       </div>
     </>
   );
