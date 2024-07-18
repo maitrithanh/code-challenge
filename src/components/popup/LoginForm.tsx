@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "../utils/Input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Button from "../utils/Button";
 import { IoMdClose } from "react-icons/io";
+import { checkLogin, setUser } from "../../hooks/Login";
+import { useTranslation } from "react-i18next";
 
 interface LoginFormProps {
   loginDialog: boolean;
@@ -17,6 +19,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const [typePassword, setTypePassword] = useState(false);
   const loginRef = useRef(null);
 
+  const { t } = useTranslation();
+
   const handleHidePassword = () => {
     setTypePassword((curr) => !curr);
   };
@@ -24,17 +28,32 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitSuccessful },
   } = useForm<FieldValues>({
     defaultValues: {
-      account: "",
+      username: "",
       password: "",
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = () => {
-    setIsLoading(true);
+  useEffect(() => {
+    reset({
+      defaultValues: {
+        username: "",
+        password: "",
+      },
+    });
+  }, [isSubmitSuccessful]);
 
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
+    // if (JSON.parse().message === false) {
+    //   alert("Username or Password Wrong!");
+    //   return;
+    // }
+    setUser(checkLogin(data.username, data.password));
+    handleOpenLogin();
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
@@ -66,14 +85,14 @@ const LoginForm: React.FC<LoginFormProps> = ({
             <div
               className={`flex justify-center text-main pb-2 text-3xl uppercase font-bold`}
             >
-              Đăng nhập
+              {t("Login")}
             </div>
             <form className="space-y-6 w-full" action="#" method="POST">
               <div>
                 <div className="mt-2">
                   <Input
-                    id="account"
-                    label={"Tài khoản"}
+                    id="username"
+                    label={t("Username")}
                     disabled={isLoading}
                     register={register}
                     errors={errors}
@@ -86,7 +105,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 <div className="mt-2">
                   <Input
                     id="password"
-                    label={"Mật khẩu"}
+                    label={t("Password")}
                     showLockIcon={true}
                     type={typePassword ? "text" : "password"}
                     typePassword={typePassword}
@@ -103,7 +122,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       href="#"
                       className="font-semibold text-main hover:opacity-80"
                     >
-                      Quên mật khẩu
+                      {t("ForgotPass")}
                     </a>
                   </div>
                 </div>
@@ -112,7 +131,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
               <div>
                 <Button
                   loading={isLoading}
-                  label={"Đăng nhập"}
+                  label={t("Login")}
                   onClick={handleSubmit(onSubmit)}
                 />
               </div>
