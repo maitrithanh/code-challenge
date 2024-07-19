@@ -1,5 +1,3 @@
-import React from "react";
-
 interface CategoryCardProps {
   link: string;
   content: string;

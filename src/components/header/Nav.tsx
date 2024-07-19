@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { PiStorefrontThin } from "react-icons/pi";
 import { TfiCommentAlt } from "react-icons/tfi";

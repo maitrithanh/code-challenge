@@ -1,4 +1,3 @@
-import React from "react";
 import { getUser } from "../hooks/Login";
 import { shop } from "../data/shop";
 import { useTranslation } from "react-i18next";

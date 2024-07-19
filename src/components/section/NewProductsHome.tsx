@@ -1,4 +1,3 @@
-import React from "react";
 import ProductCard from "../card/ProductCard";
 import { getProductMyShop } from "../../hooks/ShopProduct";
 import { useTranslation } from "react-i18next";

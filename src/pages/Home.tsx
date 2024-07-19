@@ -1,4 +1,3 @@
-import React from "react";
 import Carousel from "../components/utils/Carousel";
 import CategoryHomeSection from "../components/section/CategoryHomeSection";
 import NewProductsHome from "../components/section/NewProductsHome";

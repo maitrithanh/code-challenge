@@ -1,4 +1,3 @@
-import React from "react";
 import CategoryCard from "../card/CategoryCard";
 import { useTranslation } from "react-i18next";
 
